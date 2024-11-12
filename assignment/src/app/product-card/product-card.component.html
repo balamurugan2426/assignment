@@ -1,0 +1,18 @@
+<div class="product-card">
+  <img [src]="product.image" alt="Product Image" class="product-image" />
+  <div class="product-info">
+    <h2 class="product-name">{{ product.name }}</h2>
+    <p class="product-description">{{ product.description }}</p>
+    <div class="product-details">
+      <span class="product-price">{{ product.price | currency }}</span>
+      <div class="button-group">
+        <button *ngIf="isEditor" class="edit-button" (click)="edit()">
+          Edit
+        </button>
+        <button class="add-to-cart" (click)="addToCart(product)">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
