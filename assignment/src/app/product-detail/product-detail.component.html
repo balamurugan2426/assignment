@@ -1,1 +1,15 @@
-<p>product-detail works!</p>
+<div class="product-details-container">
+  <div class="product-image">
+    <img [src]="product.image" alt="{{ product.name }}" />
+  </div>
+
+  <div class="product-info">
+    <h1 class="product-name">{{ product.name }}</h1>
+    <p class="product-description">{{ product.description }}</p>
+    <div class="product-price">
+      <span>Price: </span>
+      <span>{{ product.price | currency }}</span>
+    </div>
+    <button class="add-to-cart-btn">Add to Cart</button>
+  </div>
+</div>

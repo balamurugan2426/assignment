@@ -25,8 +25,10 @@ export class ProductListComponent implements OnInit {
   }
   addNewProduct() {
     this.modalRef = this.modalService.show(AddProductComponent);
-    this.modalRef.content.onProductAdded = (product: any) => {
+    this.modalRef.content.onProductAdded = (product: product) => {
+      product.id = this.productList.length;
       this.productList.push(product);
+      this.productService.productList = this.productList;
     };
   }
   editProduct(product: product) {
@@ -34,15 +36,18 @@ export class ProductListComponent implements OnInit {
       initialState: { product: product },
     });
 
-    this.modalRef.content.onProductEdited = (updatedProduct: any) => {
+    this.modalRef.content.onProductEdited = (updatedProduct: product) => {
       const index = this.productList.findIndex((p) => p === product);
       if (index !== -1) {
+        updatedProduct.id = this.productList[index].id;
         this.productList[index] = updatedProduct;
+        this.productService.productList = this.productList;
       }
     };
   }
 }
 export class product {
+  id!: number;
   name!: string;
   price!: number;
   description!: string;
