@@ -7,12 +7,15 @@ import { Observable, of } from 'rxjs';
 })
 export class LoginService {
   isAdmin!: boolean;
+  isLoggedIn!: boolean;
   constructor() {}
   login(cred: loginModel): Observable<boolean> {
     if (cred.userName == 'admin' && cred.password == '123') {
       this.isAdmin = true;
+      this.isLoggedIn = true;
       return of(true);
     } else if (cred.userName == 'customer' && cred.password == '123') {
+      this.isLoggedIn = true;
       return of(true);
     } else {
       return of(false);

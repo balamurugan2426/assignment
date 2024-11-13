@@ -1,17 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product/product.service';
 import { product } from '../product-list/product-list.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss'],
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnDestroy {
   product!: product;
+  productDetailSubscription!: Subscription;
   constructor(private productService: ProductService) {
-    this.productService.productDetail$.subscribe((product) => {
-      this.product = product;
-    });
+    this.productDetailSubscription =
+      this.productService.productDetail$.subscribe((product) => {
+        this.product = product;
+      });
+  }
+  ngOnDestroy(): void {
+    this.productDetailSubscription.unsubscribe();
   }
 }
