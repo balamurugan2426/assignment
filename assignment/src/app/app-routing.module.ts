@@ -4,6 +4,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { LoginComponent } from './login/login.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { loginGuard } from './gaurds/login.guard';
+import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'product-detail/:id',
     component: ProductDetailComponent,
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'cart',
+    component: AddToCartComponent,
     canActivate: [loginGuard],
   },
 ];

@@ -15,9 +15,12 @@ export class LoginService {
       this.isLoggedIn = true;
       return of(true);
     } else if (cred.userName == 'customer' && cred.password == '123') {
+      this.isAdmin = false;
       this.isLoggedIn = true;
       return of(true);
     } else {
+      this.isAdmin = false;
+      this.isLoggedIn = false;
       return of(false);
     }
   }

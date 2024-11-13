@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 import { ProductService } from '../services/product/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -17,7 +18,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private modalService: BsModalService,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.isEditor = this.loginService.isAdmin;
@@ -44,6 +46,9 @@ export class ProductListComponent implements OnInit {
         this.productService.productList = this.productList;
       }
     };
+  }
+  showCart() {
+    this.router.navigateByUrl('cart');
   }
 }
 export class product {

@@ -1,1 +1,36 @@
-<p>add-to-cart works!</p>
+<div class="cart-container">
+  <h2>Your Cart</h2>
+
+  <div *ngFor="let item of cartItems" class="cart-item">
+    <div class="cart-item-info">
+      <img [src]="item.product.image" alt="{{ item.product.name }}" />
+      <div class="details">
+        <h4>{{ item.product.name }}</h4>
+        <p>{{ item.product.description }}</p>
+        <p>Price: {{ item.product.price | currency }}</p>
+      </div>
+    </div>
+
+    <!-- Quantity Controls -->
+    <div class="quantity-controls">
+      <button [disabled]="item.quantity == 0" (click)="decreaseQuantity(item)">
+        -
+      </button>
+      <span>{{ item.quantity }}</span>
+      <button (click)="increaseQuantity(item)">+</button>
+    </div>
+
+    <div class="item-total">
+      Total: {{ item.product.price * item.quantity | currency }}
+    </div>
+
+    <!-- Remove Item Button -->
+    <button class="remove-btn" (click)="removeFromCart(item.product.id)">
+      Remove
+    </button>
+  </div>
+
+  <div class="cart-summary">
+    <h3>Total Price: {{ totalPrice | currency }}</h3>
+  </div>
+</div>

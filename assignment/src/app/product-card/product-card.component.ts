@@ -16,7 +16,9 @@ export class ProductCardComponent {
   edit() {
     this.editProduct.emit(this.product);
   }
-  addToCart(product: product) {}
+  addToCart() {
+    this.productService.addToCart(this.product);
+  }
   showProduct() {
     this.productService.productDetail$.next(this.product);
     this.route.navigateByUrl('product-detail/' + this.product.id);
