@@ -13,6 +13,18 @@
         >
           Edit
         </button>
+        <div class="quantity-controls">
+          <button
+            [disabled]="quantity == 0"
+            (click)="decrease(); $event.stopImmediatePropagation()"
+          >
+            -
+          </button>
+          <span>{{ quantity }}</span>
+          <button (click)="increase(); $event.stopImmediatePropagation()">
+            +
+          </button>
+        </div>
         <button
           class="add-to-cart"
           (click)="addToCart(); $event.stopImmediatePropagation()"

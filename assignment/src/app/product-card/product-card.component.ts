@@ -12,15 +12,26 @@ export class ProductCardComponent {
   @Input() product!: product;
   @Input() isEditor!: boolean;
   @Output() editProduct = new EventEmitter<any>();
+  quantity: number = 0;
   constructor(private route: Router, private productService: ProductService) {}
   edit() {
     this.editProduct.emit(this.product);
   }
   addToCart() {
-    this.productService.addToCart(this.product);
+    let product = {
+      ...this.product,
+      quantity: this.quantity,
+    };
+    this.productService.addToCart(product);
   }
   showProduct() {
     this.productService.productDetail$.next(this.product);
     this.route.navigateByUrl('product-detail/' + this.product.id);
+  }
+  increase() {
+    this.quantity++;
+  }
+  decrease() {
+    if (this.quantity > 0) this.quantity--;
   }
 }

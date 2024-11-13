@@ -12,25 +12,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  productList!: product[];
   isEditor!: boolean;
   modalRef!: BsModalRef;
   constructor(
     private loginService: LoginService,
     private modalService: BsModalService,
-    private productService: ProductService,
+    public productService: ProductService,
     private router: Router
   ) {}
   ngOnInit(): void {
     this.isEditor = this.loginService.isAdmin;
-    this.productList = this.productService.productList;
   }
   addNewProduct() {
     this.modalRef = this.modalService.show(AddProductComponent);
     this.modalRef.content.onProductAdded = (product: product) => {
-      product.id = this.productList.length;
-      this.productList.push(product);
-      this.productService.productList = this.productList;
+      product.id = this.productService.productList.length;
+      this.productService.productList.push(product);
     };
   }
   editProduct(product: product) {
@@ -39,11 +36,12 @@ export class ProductListComponent implements OnInit {
     });
 
     this.modalRef.content.onProductEdited = (updatedProduct: product) => {
-      const index = this.productList.findIndex((p) => p === product);
+      const index = this.productService.productList.findIndex(
+        (p) => p === product
+      );
       if (index !== -1) {
-        updatedProduct.id = this.productList[index].id;
-        this.productList[index] = updatedProduct;
-        this.productService.productList = this.productList;
+        updatedProduct.id = this.productService.productList[index].id;
+        this.productService.productList[index] = updatedProduct;
       }
     };
   }
@@ -57,4 +55,5 @@ export class product {
   price!: number;
   description!: string;
   image!: string;
+  quantity!: number;
 }

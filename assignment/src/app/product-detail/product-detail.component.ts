@@ -17,9 +17,6 @@ export class ProductDetailComponent implements OnDestroy {
         this.product = product;
       });
   }
-  addToCart() {
-    this.productService.addToCart(this.product);
-  }
   ngOnDestroy(): void {
     this.productDetailSubscription.unsubscribe();
   }

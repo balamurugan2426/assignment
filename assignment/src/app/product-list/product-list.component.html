@@ -4,7 +4,7 @@
     Add New Card
   </button>
   <app-product-card
-    *ngFor="let product of productList"
+    *ngFor="let product of productService.productList"
     [product]="product"
     [isEditor]="isEditor"
     (editProduct)="editProduct($event)"

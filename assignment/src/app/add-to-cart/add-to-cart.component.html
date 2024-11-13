@@ -1,33 +1,22 @@
 <div class="cart-container">
   <h2>Your Cart</h2>
 
-  <div *ngFor="let item of cartItems" class="cart-item">
+  <div *ngFor="let item of productService.cartItems" class="cart-item">
     <div class="cart-item-info">
-      <img [src]="item.product.image" alt="{{ item.product.name }}" />
+      <img [src]="item.image" alt="{{ item.name }}" />
       <div class="details">
-        <h4>{{ item.product.name }}</h4>
-        <p>{{ item.product.description }}</p>
-        <p>Price: {{ item.product.price | currency }}</p>
+        <h4>{{ item.name }}</h4>
+        <p>{{ item.description }}</p>
+        <p>quantity:{{ item.quantity }}</p>
+        <p>Price: {{ item.price | currency }}</p>
       </div>
     </div>
-
-    <!-- Quantity Controls -->
-    <div class="quantity-controls">
-      <button [disabled]="item.quantity == 0" (click)="decreaseQuantity(item)">
-        -
-      </button>
-      <span>{{ item.quantity }}</span>
-      <button (click)="increaseQuantity(item)">+</button>
-    </div>
-
     <div class="item-total">
-      Total: {{ item.product.price * item.quantity | currency }}
+      Total: {{ item.price * item.quantity | currency }}
     </div>
 
     <!-- Remove Item Button -->
-    <button class="remove-btn" (click)="removeFromCart(item.product.id)">
-      Remove
-    </button>
+    <button class="remove-btn" (click)="removeFromCart(item.id)">Remove</button>
   </div>
 
   <div class="cart-summary">
