@@ -24,6 +24,9 @@ export class NavBarComponent {
       if (e instanceof NavigationStart) {
         if (e.url == '/products') {
           this.hideBactBtn = true;
+        } else if (e.url == '/login') {
+          this.loginService.isAdmin = false;
+          this.loginService.isLoggedIn = false;
         } else {
           this.hideBactBtn = false;
         }
