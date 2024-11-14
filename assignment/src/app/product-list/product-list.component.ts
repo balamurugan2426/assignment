@@ -25,14 +25,7 @@ export class ProductListComponent implements OnInit {
     this.isEditor = this.loginService.isAdmin;
     this.productList = this.productService.productList;
   }
-  addNewProduct() {
-    this.modalRef = this.modalService.show(AddProductComponent);
-    this.modalRef.content.onProductAdded = (product: product) => {
-      product.id = this.productList.length;
-      this.productList.push(product);
-      this.productService.productList = this.productList;
-    };
-  }
+
   editProduct(product: product) {
     this.modalRef = this.modalService.show(EditProductComponent, {
       initialState: { product: product },
@@ -46,9 +39,6 @@ export class ProductListComponent implements OnInit {
         this.productService.productList = this.productList;
       }
     };
-  }
-  showCart() {
-    this.router.navigateByUrl('cart');
   }
 }
 export class product {

@@ -1,8 +1,4 @@
-<button (click)="showCart()">cart</button>
-<div class="card-container">
-  <button class="add-card" *ngIf="isEditor" (click)="addNewProduct()">
-    Add New Card
-  </button>
+<div class="card-container" style="margin-top: 100px">
   <app-product-card
     *ngFor="let product of productList"
     [product]="product"
