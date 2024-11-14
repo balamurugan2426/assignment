@@ -12,7 +12,8 @@ export class ProductService {
       id: 0,
       name: 'shoe',
       price: 299,
-      description: 'cc',
+      description:
+        'A protective and stylish foot covering designed for comfort, support, and durability',
       quantity: 0,
       image:
         'https://plus.unsplash.com/premium_vector-1710758152340-1b904d410a47?w=352&dpr=1&h=367&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
@@ -21,7 +22,8 @@ export class ProductService {
       id: 1,
       name: 'brush',
       price: 15,
-      description: 'ttss',
+      description:
+        'A versatile tool with bristles for painting, cleaning, or grooming',
       quantity: 0,
 
       image:
@@ -31,7 +33,8 @@ export class ProductService {
       id: 2,
       name: 'glue',
       price: 50,
-      description: 'ttss',
+      description:
+        'An adhesive substance used to bond materials together for various crafting and repair purposes',
       quantity: 0,
 
       image:
@@ -41,7 +44,8 @@ export class ProductService {
       id: 3,
       name: 'cycle',
       price: 12000,
-      description: 'ttss',
+      description:
+        ' A two-wheeled vehicle powered by pedaling, designed for eco-friendly transportation and fitness',
       quantity: 0,
 
       image:
