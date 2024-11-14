@@ -14,6 +14,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductDetailComponent,
     AddToCartComponent,
     ProductCardComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
