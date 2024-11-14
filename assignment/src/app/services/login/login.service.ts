@@ -13,10 +13,18 @@ export class LoginService {
     if (cred.userName == 'admin' && cred.password == '123') {
       this.isAdmin = true;
       this.isLoggedIn = true;
+      localStorage.setItem(
+        'login',
+        JSON.stringify({ isLoggedIn: this.isLoggedIn, isAdmin: this.isAdmin })
+      );
       return of(true);
     } else if (cred.userName == 'customer' && cred.password == '123') {
       this.isAdmin = false;
       this.isLoggedIn = true;
+      localStorage.setItem(
+        'login',
+        JSON.stringify({ isLoggedIn: this.isLoggedIn, isAdmin: this.isAdmin })
+      );
       return of(true);
     } else {
       this.isAdmin = false;

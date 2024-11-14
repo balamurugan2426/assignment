@@ -5,7 +5,12 @@ import { LoginService } from '../services/login/login.service';
 export const loginGuard: CanActivateFn = (route, state) => {
   const loginService: LoginService = inject(LoginService);
   const router: Router = inject(Router);
-  if (!loginService.isLoggedIn) {
+  let loginCred = JSON.parse(localStorage.getItem('login'));
+  if (loginCred?.isLoggedIn && window.location.href.includes('products')) {
+    loginService.isLoggedIn = loginCred.isLoggedIn;
+    loginService.isAdmin = loginCred.isAdmin;
+    return loginCred.isLoggedIn;
+  } else if (!loginService.isLoggedIn) {
     router.navigateByUrl('login');
     return false;
   }
