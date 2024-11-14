@@ -8,7 +8,6 @@ import { product } from '../product-list/product-list.component';
   styleUrls: ['./add-to-cart.component.scss'],
 })
 export class AddToCartComponent implements OnInit {
-  // cartItems: product[] = [];
   totalPrice = 0;
 
   constructor(public productService: ProductService) {}

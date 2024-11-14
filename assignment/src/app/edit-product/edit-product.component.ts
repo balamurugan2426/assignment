@@ -15,7 +15,6 @@ export class EditProductComponent {
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder) {}
 
   ngOnInit() {
-    // Initialize the form with existing product data
     this.productForm = this.fb.group({
       name: [this.product.name, Validators.required],
       description: [this.product.description, Validators.required],
@@ -27,7 +26,6 @@ export class EditProductComponent {
   onSubmit() {
     if (this.productForm.valid) {
       this.bsModalRef.hide();
-      // Pass updated product data back to the parent component
       this.bsModalRef.content.onProductEdited(this.productForm.value);
     }
   }
