@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { product } from '../product-list/product-list.component';
+import { Product } from '../product-list/product-list.component';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -9,7 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./edit-product.component.scss'],
 })
 export class EditProductComponent {
-  @Input() product!: product;
+  @Input() product!: Product;
   productForm!: FormGroup;
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder) {}

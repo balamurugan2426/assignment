@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { product } from '../product-list/product-list.component';
+import { Product } from '../product-list/product-list.component';
 import { Router } from '@angular/router';
 import { ProductService } from '../services/product/product.service';
 
@@ -9,7 +9,7 @@ import { ProductService } from '../services/product/product.service';
   styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent {
-  @Input() product!: product;
+  @Input() product!: Product;
   @Input() isEditor!: boolean;
   @Output() editProduct = new EventEmitter<any>();
   quantity: number = 0;
@@ -25,8 +25,7 @@ export class ProductCardComponent {
     this.productService.addToCart(product);
   }
   showProduct() {
-    this.productService.productDetail$.next(this.product);
-    this.route.navigateByUrl('product-detail/' + this.product.id);
+    this.route.navigate(['/product-detail', this.product.id]);
   }
   increase() {
     this.quantity++;

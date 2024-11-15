@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginService } from '../services/login/login.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddProductComponent } from '../add-product/add-product.component';
@@ -11,25 +11,29 @@ import { Router } from '@angular/router';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   isEditor!: boolean;
   modalRef!: BsModalRef;
   constructor(
     private loginService: LoginService,
     private modalService: BsModalService,
-    public productService: ProductService,
-    private router: Router
-  ) {}
-  ngOnInit(): void {
+    public productService: ProductService
+  ) {
     this.isEditor = this.loginService.isAdmin;
+    this.productService.productDetail$.next(false);
+  }
+  ngOnInit(): void {
+    window.addEventListener('beforeunload', () => {
+      this.productService.productDetail$.next(true);
+    });
   }
 
-  editProduct(product: product) {
+  editProduct(product: Product) {
     this.modalRef = this.modalService.show(EditProductComponent, {
       initialState: { product: product },
     });
 
-    this.modalRef.content.onProductEdited = (updatedProduct: product) => {
+    this.modalRef.content.onProductEdited = (updatedProduct: Product) => {
       const index = this.productService.productList.findIndex(
         (p) => p === product
       );
@@ -39,8 +43,11 @@ export class ProductListComponent implements OnInit {
       }
     };
   }
+  ngOnDestroy(): void {
+    this.productService.productDetail$.next(true);
+  }
 }
-export class product {
+export class Product {
   id!: number;
   name!: string;
   price!: number;

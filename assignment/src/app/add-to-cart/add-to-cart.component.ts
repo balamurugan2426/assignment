@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product/product.service';
-import { product } from '../product-list/product-list.component';
+import { Product } from '../product-list/product-list.component';
 
 @Component({
   selector: 'app-add-to-cart',
@@ -10,7 +10,9 @@ import { product } from '../product-list/product-list.component';
 export class AddToCartComponent implements OnInit {
   totalPrice = 0;
 
-  constructor(public productService: ProductService) {}
+  constructor(public productService: ProductService) {
+    this.productService.productDetail$.next(false);
+  }
 
   ngOnInit(): void {
     this.calculateTotalPrice();
@@ -23,12 +25,13 @@ export class AddToCartComponent implements OnInit {
     if (index > -1) {
       this.productService.cartItems.splice(index, 1);
     }
+    this.productService.productDetail$.next(true);
     this.calculateTotalPrice();
   }
 
   calculateTotalPrice() {
     this.totalPrice = this.productService.cartItems.reduce(
-      (total: number, item: product) => total + item.price * item.quantity,
+      (total: number, item: Product) => total + item.price * item.quantity,
       0
     );
   }

@@ -32,7 +32,7 @@ export class LoginComponent {
         password: this.loginForm.value.password,
       })
       .subscribe((data) => {
-        data ? this.route.navigate(['products']) : this.loginForm.reset();
+        data ? this.route.navigateByUrl('/products') : this.loginForm.reset();
       });
   }
 }

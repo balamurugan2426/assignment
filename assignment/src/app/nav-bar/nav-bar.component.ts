@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { LoginService } from '../services/login/login.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddProductComponent } from '../add-product/add-product.component';
-import { product } from '../product-list/product-list.component';
+import { Product } from '../product-list/product-list.component';
 import { ProductService } from '../services/product/product.service';
 
 @Component({
@@ -20,6 +20,9 @@ export class NavBarComponent {
     private modalService: BsModalService,
     private productService: ProductService
   ) {
+    if (!window.location.href.includes('products')) {
+      this.hideBactBtn = false;
+    }
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationStart) {
         if (e.url == '/products') {
@@ -34,16 +37,16 @@ export class NavBarComponent {
     });
   }
   showCart() {
-    this.router.navigateByUrl('cart');
+    this.router.navigateByUrl('/cart');
   }
   addNewProduct() {
     this.modalRef = this.modalService.show(AddProductComponent);
-    this.modalRef.content.onProductAdded = (product: product) => {
+    this.modalRef.content.onProductAdded = (product: Product) => {
       product.id = this.productService.productList.length;
       this.productService.productList.push(product);
     };
   }
   showProductList() {
-    this.router.navigateByUrl('products');
+    this.router.navigateByUrl('/products');
   }
 }
